@@ -1,12 +1,12 @@
 <script>
 import {key} from './util.js';
+import UsersList from './UsersList.svelte'
 
 
   let password = "";
   let username = "";
   let token = "";
   let error;
-  let users_data = [];
   let user = { loggedIn: false };
   
   const handleLogin = async () => {
@@ -46,33 +46,13 @@ import {key} from './util.js';
 
 
 
-  const getUsers = async () => {	
-	const response = await fetch("http://localhost:4000/users", {
-      method: "GET",
-      headers: {
-		"Content-Type": "application/json",
-		"Authorization": "Bearer "+localStorage.getItem("key"),
-        "Accept": "application/json",
-	  },	  
-	});
-	users_data = await response.json();
-  };
 
-
-  if(localStorage.getItem("key").length > 0){
-	getUsers();
-  }
 </script>
 
 
 
 
-<head>
-	<link
-	  rel="stylesheet"
-	  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	/>
-  </head>
+
 
 <!--if not logged in-->
 
@@ -92,18 +72,9 @@ import {key} from './util.js';
 {/if}
 
 
-<!-- logged in show user data-->
 {#if user.loggedIn}
-<h1>User Data</h1>
-
 <button class="btn btn-primary" on:click="{handleLogout}">Logout</button>
-
-{#each users_data as user}
-<div class="container bg-light d-flex my-2 pt-3 justify-content-between flex-column">
-	<b>username</b> <p>{user.username}</p>
-	<b>age</b> <p>{user.age}</p>
-</div>
-{/each}
+<UsersList/>
 {/if}
 
 {#if error}
