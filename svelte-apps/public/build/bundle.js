@@ -733,7 +733,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src/App.svelte";
 
-    // (60:0) {#if !user.loggedIn}
+    // (62:0) {#if !user.loggedIn}
     function create_if_block_2(ctx) {
     	let form;
     	let label0;
@@ -762,15 +762,15 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Login";
     			attr_dev(input0, "type", "text");
-    			add_location(input0, file$1, 63, 4, 1053);
-    			add_location(label0, file$1, 61, 2, 1027);
+    			add_location(input0, file$1, 65, 4, 1104);
+    			add_location(label0, file$1, 63, 2, 1078);
     			attr_dev(input1, "type", "password");
-    			add_location(input1, file$1, 67, 4, 1138);
-    			add_location(label1, file$1, 65, 2, 1112);
+    			add_location(input1, file$1, 69, 4, 1189);
+    			add_location(label1, file$1, 67, 2, 1163);
     			attr_dev(button, "type", "submit");
-    			add_location(button, file$1, 69, 2, 1201);
+    			add_location(button, file$1, 71, 2, 1252);
     			attr_dev(form, "method", "post");
-    			add_location(form, file$1, 60, 0, 963);
+    			add_location(form, file$1, 62, 0, 1014);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -816,14 +816,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(60:0) {#if !user.loggedIn}",
+    		source: "(62:0) {#if !user.loggedIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (75:0) {#if user.loggedIn}
+    // (77:0) {#if user.loggedIn}
     function create_if_block_1(ctx) {
     	let button;
     	let t1;
@@ -840,7 +840,7 @@ var app = (function () {
     			t1 = space();
     			create_component(userslist.$$.fragment);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 75, 0, 1274);
+    			add_location(button, file$1, 77, 0, 1325);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -876,14 +876,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(75:0) {#if user.loggedIn}",
+    		source: "(77:0) {#if user.loggedIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (80:0) {#if error}
+    // (82:0) {#if error}
     function create_if_block$1(ctx) {
     	let p;
     	let t;
@@ -892,7 +892,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*error*/ ctx[2]);
-    			add_location(p, file$1, 80, 0, 1380);
+    			add_location(p, file$1, 82, 0, 1431);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -910,7 +910,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(80:0) {#if error}",
+    		source: "(82:0) {#if error}",
     		ctx
     	});
 
@@ -1055,13 +1055,17 @@ var app = (function () {
     		} else {
     			window.localStorage.setItem("key", token);
     			$$invalidate(3, user.loggedIn = !user.loggedIn, user);
+    			$$invalidate(2, error = "");
     			getUsers();
     		}
     	};
 
     	const handleLogout = async () => {
     		$$invalidate(3, user.loggedIn = !user.loggedIn, user);
-    		key.set("");
+
+    		//key.set('')
+    		window.localStorage.clear();
+
     		$$invalidate(0, password = "");
     		$$invalidate(1, username = "");
     		token = "";

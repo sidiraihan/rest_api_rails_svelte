@@ -29,7 +29,8 @@ import UsersList from './UsersList.svelte'
 
     } else {
 	  window.localStorage.setItem('key', token);
-	  user.loggedIn = !user.loggedIn;
+    user.loggedIn = !user.loggedIn;
+    error = '';
 	  getUsers();
 	}
 	
@@ -37,7 +38,8 @@ import UsersList from './UsersList.svelte'
 
   const handleLogout = async () => {
 	user.loggedIn = !user.loggedIn;
-	key.set('')
+  //key.set('')
+  window.localStorage.clear();
 	password = "";
 	username = "";
 	token = "";
