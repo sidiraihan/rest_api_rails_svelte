@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+clone to your machine
 
-Things you may want to cover:
+rails db:migrate
 
-* Ruby version
+rails db:seed
 
-* System dependencies
+rails s
 
-* Configuration
+then
 
-* Database creation
+cd /svelte-apps
 
-* Database initialization
+npm run dev
 
-* How to run the test suite
+now open localhost:3000 on your browser 
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+postman api collection https://www.getpostman.com/collections/e69234d9e0ff324966fc
