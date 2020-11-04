@@ -27,6 +27,21 @@ var app = (function () {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function validate_store(store, name) {
+        if (store != null && typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, ...callbacks) {
+        if (store == null) {
+            return noop;
+        }
+        const unsub = store.subscribe(...callbacks);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
 
     function append(target, node) {
         target.appendChild(node);
@@ -762,15 +777,15 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Login";
     			attr_dev(input0, "type", "text");
-    			add_location(input0, file$1, 80, 4, 1431);
-    			add_location(label0, file$1, 78, 2, 1405);
+    			add_location(input0, file$1, 80, 4, 1434);
+    			add_location(label0, file$1, 78, 2, 1408);
     			attr_dev(input1, "type", "password");
-    			add_location(input1, file$1, 84, 4, 1516);
-    			add_location(label1, file$1, 82, 2, 1490);
+    			add_location(input1, file$1, 84, 4, 1519);
+    			add_location(label1, file$1, 82, 2, 1493);
     			attr_dev(button, "type", "submit");
-    			add_location(button, file$1, 86, 2, 1579);
+    			add_location(button, file$1, 86, 2, 1582);
     			attr_dev(form, "method", "post");
-    			add_location(form, file$1, 77, 0, 1341);
+    			add_location(form, file$1, 77, 0, 1344);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -840,7 +855,7 @@ var app = (function () {
     			t1 = space();
     			create_component(userslist.$$.fragment);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 92, 0, 1652);
+    			add_location(button, file$1, 92, 0, 1655);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -892,7 +907,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*error*/ ctx[2]);
-    			add_location(p, file$1, 97, 0, 1758);
+    			add_location(p, file$1, 97, 0, 1761);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1039,6 +1054,9 @@ var app = (function () {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
+    	let $key;
+    	validate_store(key, "key");
+    	component_subscribe($$self, key, $$value => $$invalidate(9, $key = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("App", slots, []);
     	let password = "";
@@ -1047,16 +1065,7 @@ var app = (function () {
     	let error;
     	let user = { loggedIn: false };
 
-    	const unsubscribe = key.subscribe(value => {
-    		if (value === "null" || value == "") {
-    			console.log("empty key " + value);
-    			$$invalidate(3, user.loggedIn = false, user);
-    		} else {
-    			console.log("key " + value);
-    			$$invalidate(3, user.loggedIn = true, user);
-    		}
-    	});
-
+    	//});
     	//loginStatus = user.loggedIn;
     	const handleLogin = async () => {
     		const response = await fetch("http://localhost:4000/login", {
@@ -1119,9 +1128,9 @@ var app = (function () {
     		token,
     		error,
     		user,
-    		unsubscribe,
     		handleLogin,
-    		handleLogout
+    		handleLogout,
+    		$key
     	});
 
     	$$self.$inject_state = $$props => {
@@ -1135,6 +1144,19 @@ var app = (function () {
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*$key*/ 512) {
+    			//const unsubscribe = key.subscribe(value => {
+    			 if ($key === "null" || $key == "") {
+    				console.log("empty key " + $key);
+    				$$invalidate(3, user.loggedIn = false, user);
+    			} else {
+    				console.log("key " + $key);
+    				$$invalidate(3, user.loggedIn = true, user);
+    			}
+    		}
+    	};
 
     	return [
     		password,

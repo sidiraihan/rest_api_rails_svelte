@@ -11,15 +11,15 @@ import UsersList from './UsersList.svelte'
 
 
 
-  const unsubscribe = key.subscribe(value => {
-    if(value === 'null' || value == ''){
-      console.log('empty key ' +value)
+  //const unsubscribe = key.subscribe(value => {
+    $: if($key === 'null' || $key == ''){
+      console.log('empty key ' +$key)
       user.loggedIn = false;
     }else{
-      console.log('key ' +value)
+      console.log('key ' +$key)
       user.loggedIn = true;
     }
-  });
+  //});
 
   //loginStatus = user.loggedIn;
   
