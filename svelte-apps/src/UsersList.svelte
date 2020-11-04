@@ -8,8 +8,8 @@
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("key"),
-                Accept: "application/json",
+                "Authorization": "Bearer " +$key,
+                "Accept": "application/json",
             },
         });
         users_data = await response.json();

@@ -11,18 +11,37 @@ import UsersList from './UsersList.svelte'
 
 
 
-  //const unsubscribe = key.subscribe(value => {
     $: if($key === 'null' || $key == ''){
       console.log('empty key ' +$key)
       user.loggedIn = false;
     }else{
       console.log('key ' +$key)
       user.loggedIn = true;
+      autoLogin();
     }
-  //});
 
-  //loginStatus = user.loggedIn;
   
+
+    const autoLogin = async () => {
+      const response = await fetch("http://localhost:4000/auto_login", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " +$key,
+          "Accept": "application/json",
+        },
+      });
+	
+      const parsed = await response.json();
+      if (parsed.status === 'success') {
+        console.log('validation '+parsed.status);
+      } else {
+        handleLogout();
+        console.log('validation fail '+parsed.status);
+        error = parsed.status;
+      }
+  };
+
   const handleLogin = async () => {
     const response = await fetch("http://localhost:4000/login", {
       method: "POST",
@@ -31,7 +50,7 @@ import UsersList from './UsersList.svelte'
         "Accept": "application/json",
       },
       body: JSON.stringify({ username, password }),
-	});
+	  });
 	
 	const parsed = await response.json();
 	
@@ -54,7 +73,7 @@ import UsersList from './UsersList.svelte'
   };
 
   const handleLogout = async () => {
-    user.loggedIn = !user.loggedIn;
+    user.loggedIn = false;
     key.set('')
     password = "";
     username = "";

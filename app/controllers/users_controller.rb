@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
     
     def auto_login
-        render json: @user
+        render json: {user: @user, status: "success"}
     end
 
     def test

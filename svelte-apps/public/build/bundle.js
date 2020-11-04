@@ -470,7 +470,7 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[3] = list[i];
+    	child_ctx[4] = list[i];
     	return child_ctx;
     }
 
@@ -480,13 +480,13 @@ var app = (function () {
     	let b0;
     	let t1;
     	let p0;
-    	let t2_value = /*user*/ ctx[3].username + "";
+    	let t2_value = /*user*/ ctx[4].username + "";
     	let t2;
     	let t3;
     	let b1;
     	let t5;
     	let p1;
-    	let t6_value = /*user*/ ctx[3].age + "";
+    	let t6_value = /*user*/ ctx[4].age + "";
     	let t6;
 
     	const block = {
@@ -503,12 +503,12 @@ var app = (function () {
     			t5 = space();
     			p1 = element("p");
     			t6 = text(t6_value);
-    			add_location(b0, file, 29, 8, 813);
-    			add_location(p0, file, 30, 8, 837);
-    			add_location(b1, file, 31, 8, 868);
-    			add_location(p1, file, 32, 8, 887);
+    			add_location(b0, file, 29, 8, 793);
+    			add_location(p0, file, 30, 8, 817);
+    			add_location(b1, file, 31, 8, 848);
+    			add_location(p1, file, 32, 8, 867);
     			attr_dev(div, "class", "container bg-light d-flex my-2 pt-3 justify-content-between flex-column");
-    			add_location(div, file, 27, 4, 711);
+    			add_location(div, file, 27, 4, 691);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -523,8 +523,8 @@ var app = (function () {
     			append_dev(p1, t6);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*users_data*/ 1 && t2_value !== (t2_value = /*user*/ ctx[3].username + "")) set_data_dev(t2, t2_value);
-    			if (dirty & /*users_data*/ 1 && t6_value !== (t6_value = /*user*/ ctx[3].age + "")) set_data_dev(t6, t6_value);
+    			if (dirty & /*users_data*/ 1 && t2_value !== (t2_value = /*user*/ ctx[4].username + "")) set_data_dev(t2, t2_value);
+    			if (dirty & /*users_data*/ 1 && t6_value !== (t6_value = /*user*/ ctx[4].age + "")) set_data_dev(t6, t6_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -551,7 +551,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*error*/ ctx[1]);
-    			add_location(p, file, 37, 4, 941);
+    			add_location(p, file, 37, 4, 921);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -604,7 +604,7 @@ var app = (function () {
     			t2 = space();
     			if (if_block) if_block.c();
     			if_block_anchor = empty();
-    			add_location(h1, file, 25, 0, 661);
+    			add_location(h1, file, 25, 0, 641);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -683,6 +683,9 @@ var app = (function () {
     }
 
     function instance($$self, $$props, $$invalidate) {
+    	let $key;
+    	validate_store(key, "key");
+    	component_subscribe($$self, key, $$value => $$invalidate(2, $key = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("UsersList", slots, []);
     	let users_data = [];
@@ -693,8 +696,8 @@ var app = (function () {
     			method: "GET",
     			headers: {
     				"Content-Type": "application/json",
-    				Authorization: "Bearer " + localStorage.getItem("key"),
-    				Accept: "application/json"
+    				"Authorization": "Bearer " + $key,
+    				"Accept": "application/json"
     			}
     		});
 
@@ -715,7 +718,7 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<UsersList> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ key, users_data, error, getUsers });
+    	$$self.$capture_state = () => ({ key, users_data, error, getUsers, $key });
 
     	$$self.$inject_state = $$props => {
     		if ("users_data" in $$props) $$invalidate(0, users_data = $$props.users_data);
@@ -748,7 +751,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src/App.svelte";
 
-    // (77:0) {#if !user.loggedIn}
+    // (96:0) {#if !user.loggedIn}
     function create_if_block_2(ctx) {
     	let form;
     	let label0;
@@ -777,15 +780,15 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Login";
     			attr_dev(input0, "type", "text");
-    			add_location(input0, file$1, 80, 4, 1434);
-    			add_location(label0, file$1, 78, 2, 1408);
+    			add_location(input0, file$1, 99, 4, 1935);
+    			add_location(label0, file$1, 97, 2, 1909);
     			attr_dev(input1, "type", "password");
-    			add_location(input1, file$1, 84, 4, 1519);
-    			add_location(label1, file$1, 82, 2, 1493);
+    			add_location(input1, file$1, 103, 4, 2020);
+    			add_location(label1, file$1, 101, 2, 1994);
     			attr_dev(button, "type", "submit");
-    			add_location(button, file$1, 86, 2, 1582);
+    			add_location(button, file$1, 105, 2, 2083);
     			attr_dev(form, "method", "post");
-    			add_location(form, file$1, 77, 0, 1344);
+    			add_location(form, file$1, 96, 0, 1845);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -831,14 +834,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(77:0) {#if !user.loggedIn}",
+    		source: "(96:0) {#if !user.loggedIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (92:0) {#if user.loggedIn}
+    // (111:0) {#if user.loggedIn}
     function create_if_block_1(ctx) {
     	let button;
     	let t1;
@@ -855,7 +858,7 @@ var app = (function () {
     			t1 = space();
     			create_component(userslist.$$.fragment);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 92, 0, 1655);
+    			add_location(button, file$1, 111, 0, 2156);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -891,14 +894,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(92:0) {#if user.loggedIn}",
+    		source: "(111:0) {#if user.loggedIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (97:0) {#if error}
+    // (116:0) {#if error}
     function create_if_block$1(ctx) {
     	let p;
     	let t;
@@ -907,7 +910,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*error*/ ctx[2]);
-    			add_location(p, file$1, 97, 0, 1761);
+    			add_location(p, file$1, 116, 0, 2262);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -925,7 +928,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(97:0) {#if error}",
+    		source: "(116:0) {#if error}",
     		ctx
     	});
 
@@ -1065,8 +1068,27 @@ var app = (function () {
     	let error;
     	let user = { loggedIn: false };
 
-    	//});
-    	//loginStatus = user.loggedIn;
+    	const autoLogin = async () => {
+    		const response = await fetch("http://localhost:4000/auto_login", {
+    			method: "GET",
+    			headers: {
+    				"Content-Type": "application/json",
+    				"Authorization": "Bearer " + $key,
+    				"Accept": "application/json"
+    			}
+    		});
+
+    		const parsed = await response.json();
+
+    		if (parsed.status === "success") {
+    			console.log("validation " + parsed.status);
+    		} else {
+    			handleLogout();
+    			console.log("validation fail " + parsed.status);
+    			$$invalidate(2, error = parsed.status);
+    		}
+    	};
+
     	const handleLogin = async () => {
     		const response = await fetch("http://localhost:4000/login", {
     			method: "POST",
@@ -1096,7 +1118,7 @@ var app = (function () {
     	};
 
     	const handleLogout = async () => {
-    		$$invalidate(3, user.loggedIn = !user.loggedIn, user);
+    		$$invalidate(3, user.loggedIn = false, user);
     		key.set("");
     		$$invalidate(0, password = "");
     		$$invalidate(1, username = "");
@@ -1128,6 +1150,7 @@ var app = (function () {
     		token,
     		error,
     		user,
+    		autoLogin,
     		handleLogin,
     		handleLogout,
     		$key
@@ -1147,13 +1170,13 @@ var app = (function () {
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*$key*/ 512) {
-    			//const unsubscribe = key.subscribe(value => {
     			 if ($key === "null" || $key == "") {
     				console.log("empty key " + $key);
     				$$invalidate(3, user.loggedIn = false, user);
     			} else {
     				console.log("key " + $key);
     				$$invalidate(3, user.loggedIn = true, user);
+    				autoLogin();
     			}
     		}
     	};
@@ -1187,7 +1210,7 @@ var app = (function () {
     const app = new App({
     	target: document.body,
     	props: {
-    		name: 'world'
+    		name: 'myapp'
     	}
     });
 
