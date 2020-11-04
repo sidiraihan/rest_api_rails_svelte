@@ -8,6 +8,20 @@ import UsersList from './UsersList.svelte'
   let token = "";
   let error;
   let user = { loggedIn: false };
+
+
+
+  const unsubscribe = key.subscribe(value => {
+    if(value === 'null' || value == ''){
+      console.log('empty key ' +value)
+      user.loggedIn = false;
+    }else{
+      console.log('key ' +value)
+      user.loggedIn = true;
+    }
+  });
+
+  //loginStatus = user.loggedIn;
   
   const handleLogin = async () => {
     const response = await fetch("http://localhost:4000/login", {
@@ -28,22 +42,24 @@ import UsersList from './UsersList.svelte'
 	  console.log(parsed);
 
     } else {
-	  window.localStorage.setItem('key', token);
-    user.loggedIn = !user.loggedIn;
+    //window.localStorage.setItem('key', token);
+    key.set(token);
+    user.loggedIn = true;
+    password = "";
+    username = "";
+    token = "";
     error = '';
-	  getUsers();
 	}
 	
   };
 
   const handleLogout = async () => {
-	user.loggedIn = !user.loggedIn;
-  //key.set('')
-  window.localStorage.clear();
-	password = "";
-	username = "";
-	token = "";
-	users_data = [];
+    user.loggedIn = !user.loggedIn;
+    key.set('')
+    password = "";
+    username = "";
+    token = "";
+    users_data = [];
   };
 
 
@@ -57,8 +73,7 @@ import UsersList from './UsersList.svelte'
 
 
 <!--if not logged in-->
-
-
+{user.loggedIn}
 {#if !user.loggedIn}
 <form on:submit|preventDefault="{handleLogin}" method="post">
   <label>
@@ -82,3 +97,5 @@ import UsersList from './UsersList.svelte'
 {#if error}
 <p>{error}</p>
 {/if}
+
+
