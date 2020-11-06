@@ -751,7 +751,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src/App.svelte";
 
-    // (96:0) {#if !user.loggedIn}
+    // (80:0) {#if !user.loggedIn}
     function create_if_block_2(ctx) {
     	let form;
     	let label0;
@@ -770,25 +770,25 @@ var app = (function () {
     		c: function create() {
     			form = element("form");
     			label0 = element("label");
-    			t0 = text("Username:\n    ");
+    			t0 = text("Username: ");
     			input0 = element("input");
     			t1 = space();
     			label1 = element("label");
-    			t2 = text("Password:\n    ");
+    			t2 = text("Password: ");
     			input1 = element("input");
     			t3 = space();
     			button = element("button");
     			button.textContent = "Login";
     			attr_dev(input0, "type", "text");
-    			add_location(input0, file$1, 99, 4, 1935);
-    			add_location(label0, file$1, 97, 2, 1909);
+    			add_location(input0, file$1, 81, 22, 1902);
+    			add_location(label0, file$1, 81, 4, 1884);
     			attr_dev(input1, "type", "password");
-    			add_location(input1, file$1, 103, 4, 2020);
-    			add_location(label1, file$1, 101, 2, 1994);
+    			add_location(input1, file$1, 82, 22, 1977);
+    			add_location(label1, file$1, 82, 4, 1959);
     			attr_dev(button, "type", "submit");
-    			add_location(button, file$1, 105, 2, 2083);
+    			add_location(button, file$1, 83, 4, 2038);
     			attr_dev(form, "method", "post");
-    			add_location(form, file$1, 96, 0, 1845);
+    			add_location(form, file$1, 80, 2, 1820);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -834,14 +834,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(96:0) {#if !user.loggedIn}",
+    		source: "(80:0) {#if !user.loggedIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (111:0) {#if user.loggedIn}
+    // (88:0) {#if user.loggedIn}
     function create_if_block_1(ctx) {
     	let button;
     	let t1;
@@ -858,7 +858,7 @@ var app = (function () {
     			t1 = space();
     			create_component(userslist.$$.fragment);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 111, 0, 2156);
+    			add_location(button, file$1, 88, 2, 2114);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -894,14 +894,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(111:0) {#if user.loggedIn}",
+    		source: "(88:0) {#if user.loggedIn}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (116:0) {#if error}
+    // (93:0) {#if error}
     function create_if_block$1(ctx) {
     	let p;
     	let t;
@@ -910,7 +910,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*error*/ ctx[2]);
-    			add_location(p, file$1, 116, 0, 2262);
+    			add_location(p, file$1, 93, 2, 2223);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -928,7 +928,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(116:0) {#if error}",
+    		source: "(93:0) {#if error}",
     		ctx
     	});
 
@@ -1073,8 +1073,8 @@ var app = (function () {
     			method: "GET",
     			headers: {
     				"Content-Type": "application/json",
-    				"Authorization": "Bearer " + $key,
-    				"Accept": "application/json"
+    				Authorization: "Bearer " + $key,
+    				Accept: "application/json"
     			}
     		});
 
@@ -1094,7 +1094,7 @@ var app = (function () {
     			method: "POST",
     			headers: {
     				"Content-Type": "application/json",
-    				"Accept": "application/json"
+    				Accept: "application/json"
     			},
     			body: JSON.stringify({ username, password })
     		});
