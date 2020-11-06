@@ -27,9 +27,9 @@
 {#each users_data as user}
     <div
         class="container bg-light d-flex my-2 pt-3 justify-content-between flex-column">
-        <b>username</b>
+        <b>username :</b>
         <p>{user.username}</p>
-        <b>age</b>
+        <b>age :</b>
         <p>{user.age}</p>
     </div>
 {/each}
